@@ -1,11 +1,7 @@
-<h1 align="center">mongo-connector使用详解</h1>
+<h1 align="center">mongo-connector使用备忘</h1>
 <h5 align="right"> 2017年10月31号</h5>
-
-### 1、mongo-connector介绍
-   mongo-connector是基于python开发的实时同步服务工具，使用mongo-connector必须开启mongodb的副本集，mongo-connector利用mongodb的oplog实现数据同步，目标数据源可以是elasticsearch、mongodb、solr，还可以实现自定义目标数据源。
-  
     
-### 2、 mongo-connector的config文件主要参数介绍
+### 1、 mongo-connector的config文件主要参数介绍
 <pre><code>
    * "mainAddress": "localhost:27017"   #mongodb的连接url
        
@@ -50,7 +46,7 @@
 }
 </code></pre>
   
-### 3、安装mongo-connector
+### 2、安装mongo-connector
 
 以linux为例：
 
@@ -77,7 +73,7 @@ mongo\_connector-2.5.1-py2.7.egg
 mongo_connector
 </code></pre>
 
-### 4、安装elastic2\_doc_manager
+### 3、安装elastic2\_doc_manager
 
 <pre><code>
 cd /usr/local/mongo-connector/
@@ -110,7 +106,7 @@ elasticsearch-2.3.0.dist-info
 </code></pre>
 文件。注意：该目录会由于python的安装目录不同而不同。
 
-### 5、把mongo-connector安装为服务
+### 4、把mongo-connector安装为服务
 
 <pre><code>
 cd /usr/local/mongo-connector-2.5.1
@@ -133,7 +129,7 @@ https://github.com/mongodb-labs/mongo-connector/issues/305
 </code></pre>
 时间戳需要进行格式转换。
 
-### 6、多个mongodb表入es为多个index，使用多个进程的方法
+### 5、多个mongodb表入es为多个index，使用多个进程的方法
 
 * 复制/usr/local/lib/python2.7/site-packages/elastic2\_doc_manager-0.3.0-py2.7.egg/mongo\_connector/doc\_managers/elastic2\_doc_manager.py，重命名该文件为test\_doc\_manager.py，修改文件内容解析对应的数据。elastic2\_doc_manager.py文件所在的目录会因为安装方法不同在不同的目录。
 
@@ -145,7 +141,7 @@ https://github.com/mongodb-labs/mongo-connector/issues/305
 nohup /usr/bin/python -m mongo_connector.connector -c /etc/test-connector.json &
 </code></pre>
 
-### 7、mongodb to mongo的配置
+### 6、mongodb to mongo的配置
 
 如果需要实现mongodb to mongodb的数据同步，只需要修改config文件的docManager即可。如：
 <pre><code>
