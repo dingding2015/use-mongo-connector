@@ -1,5 +1,4 @@
 <h1 align="center">mongo-connector使用备忘</h1>
-<h5 align="right"> 2017年10月31号</h5>
     
 ### 1、 mongo-connector的config文件主要参数介绍
 <pre><code>
