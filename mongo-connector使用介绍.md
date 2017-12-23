@@ -101,7 +101,7 @@ elasticsearch-2.3.0.dist-info
 
 如果要对从mongodb中的数据在转入es的过程中进行格式转换，可以修改
 <pre><code>
-/usr/local/lib/python2.7/site-packages/elastic2\_doc_manager-0.3.0-py2.7.egg/mongo_connector/doc_managers/elastic2_doc_manager.py
+/usr/local/lib/python2.7/site-packages/elastic2_doc_manager-0.3.0-py2.7.egg/mongo_connector/doc_managers/elastic2_doc_manager.py
 </code></pre>
 文件。注意：该目录会由于python的安装目录不同而不同。
 
