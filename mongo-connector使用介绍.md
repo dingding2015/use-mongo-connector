@@ -39,7 +39,7 @@
             "targetURL": "localhost:9200", #目标数据源连接url
             "__bulkSize": 1000,  #每次同步数据量
             "__uniqueKey": "_id",  #主键
-            "__autoCommitInterval": null #是否自动提交
+            "__autoCommitInterval": null #自动提交
         }
     ]
 }
@@ -150,6 +150,6 @@ nohup /usr/bin/python -m mongo_connector.connector -c /etc/test-connector.json &
             "targetURL": "localhost:9200", #目标数据源连接url修改为目标mongo的连接
             "bulkSize": 1000,  #每次同步数据量
             "uniqueKey": "_id",  #主键
-            "autoCommitInterval": null #是否自动提交
+            "autoCommitInterval": null #自动提交
         }
 </code></pre>
