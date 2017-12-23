@@ -68,7 +68,7 @@ python setup.py install
 
 安装成功会在/usr/local/lib/python2.7/site-packages中添加一些文件，如：
 <pre><code>
-mongo\_connector-2.5.1-py2.7.egg    
+mongo_connector-2.5.1-py2.7.egg    
 mongo_connector
 </code></pre>
 
@@ -101,7 +101,7 @@ elasticsearch-2.3.0.dist-info
 
 如果要对从mongodb中的数据在转入es的过程中进行格式转换，可以修改
 <pre><code>
-/usr/local/lib/python2.7/site-packages/elastic2\_doc_manager-0.3.0-py2.7.egg/mongo\_connector/doc\_managers/elastic2\_doc_manager.py
+/usr/local/lib/python2.7/site-packages/elastic2\_doc_manager-0.3.0-py2.7.egg/mongo_connector/doc_managers/elastic2_doc_manager.py
 </code></pre>
 文件。注意：该目录会由于python的安装目录不同而不同。
 
@@ -130,9 +130,9 @@ https://github.com/mongodb-labs/mongo-connector/issues/305
 
 ### 5、多个mongodb表入es为多个index，使用多个进程的方法
 
-* 复制/usr/local/lib/python2.7/site-packages/elastic2\_doc_manager-0.3.0-py2.7.egg/mongo\_connector/doc\_managers/elastic2\_doc_manager.py，重命名该文件为test\_doc\_manager.py，修改文件内容解析对应的数据。elastic2\_doc_manager.py文件所在的目录会因为安装方法不同在不同的目录。
+* 复制/usr/local/lib/python2.7/site-packages/elastic2_doc_manager-0.3.0-py2.7.egg/mongo_connector/doc_managers/elastic2_doc_manager.py，重命名该文件为test_doc_manager.py，修改文件内容解析对应的数据。elastic2_doc_manager.py文件所在的目录会因为安装方法不同在不同的目录。
 
-* 在/etc/目录下面复制mongo-connector.json文件，重命名为test-connector.json，修改test-connector.json里面的oplogFile存储位置和log文件存储位置，避免不同的进程冲突，修改docManager为test\_doc_manager.py。
+* 在/etc/目录下面复制mongo-connector.json文件，重命名为test-connector.json，修改test-connector.json里面的oplogFile存储位置和log文件存储位置，避免不同的进程冲突，修改docManager为test_doc_manager.py。
 
 * 启动mongo-connector的时候使用python进行启动，如：
 
@@ -149,7 +149,7 @@ nohup /usr/bin/python -m mongo_connector.connector -c /etc/test-connector.json &
             "docManager": "mongo_doc_manager",  
             "targetURL": "localhost:9200", #目标数据源连接url修改为目标mongo的连接
             "bulkSize": 1000,  #每次同步数据量
-            "uniqueKey": "\_id",  #主键
+            "uniqueKey": "_id",  #主键
             "autoCommitInterval": null #是否自动提交
         }
 </code></pre>
