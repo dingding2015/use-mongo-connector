@@ -142,14 +142,80 @@ nohup /usr/bin/python -m mongo_connector.connector -c /etc/test-connector.json &
 
 ### 6、mongodb to mongo的配置
 
-如果需要实现mongodb to mongodb的数据同步，只需要修改config文件的docManager即可。如：
+如果需要实现mongodb to mongodb的数据同步，修改config文件的docManager。如：
 <pre><code>
 "docManagers": [
         {
             "docManager": "mongo_doc_manager",  
-            "targetURL": "localhost:9200", #目标数据源连接url修改为目标mongo的连接
+            "targetURL": "localhost:27017", #目标数据源连接url修改为目标mongo的连接
             "bulkSize": 1000,  #每次同步数据量
             "uniqueKey": "_id",  #主键
             "autoCommitInterval": null #自动提交
         }
+</code></pre>
+
+### 7、新版本2.5.1的namespaces使用
+<pre><code>
+"__namespaces": {
+        "excluded.collection": false,   # 不包含的表
+        "excluded_wildcard.*": false,   # 不包含的库
+        "*.exclude_collection_from_every_database": false,  # 不包含库中的特定表
+        "included.collection1": true,   # 同步表中的一个库
+        "included.collection2": {},
+        "included.collection4": {       #  同步表中的几个字段
+            "includeFields": ["included_field", "included.nested.field"]
+        },
+        "included.collection5": {  # 重命名表
+            "rename": "included.new_collection5_name",
+            "includeFields": ["included_field", "included.nested.field"]
+        },
+        "included.collection6": {  
+            "excludeFields": ["excluded_field", "excluded.nested.field"]
+        },
+        "included.collection7": { # 重命名表，同步几个字段
+            "rename": "included.new_collection7_name",
+            "excludeFields": ["excluded_field", "excluded.nested.field"]
+        },
+        "included_wildcard1.*": true,  # 同步库中所有的表
+        "included_wildcard2.*": true,
+        "renamed.collection1": "something.else1",  # 重命名表
+        "renamed.collection2": {  
+            "rename": "something.else2"
+        },
+        "renamed_wildcard.*": {  #重命名库
+            "rename": "new_name.*"
+        },
+        "gridfs.collection": {
+            "gridfs": true
+        },
+        "gridfs_wildcard.*": {
+            "gridfs": true
+        }
+    },
+</code></pre>
+
+### 8、mongo to mongo时候的认证问题
+ 使用mongo_doc_manager的时候targetURL的写法：
+ <pre><code>
+ {  
+   "docManagers": [
+        {
+            "docManager": "mongo_doc_manager",
+            "targetURL": "mongodb://mongo-connector-target-user:password@localhost:27017",
+        }
+    ]
+}
+ </code></pre>
+ 
+ ### 9、mongo to es时候的认证问题
+ 使用elastic2_doc_manager的targetURL写法：
+  <pre><code>
+  {  
+   "docManagers": [
+        {
+            "docManager": "elastic2_doc_manager",
+            "targetURL": "mongo-connector-target-user:password@localhost:9200",
+        }
+    ]
+}
 </code></pre>
